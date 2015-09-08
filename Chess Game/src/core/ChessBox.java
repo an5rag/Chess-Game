@@ -5,13 +5,13 @@ package core;
  */
 public class ChessBox {
 
-    char file;
+    int file;
     int rank;
-    char color;
+    String color;
     Piece occupyingPiece;
     boolean occupied;
 
-    public ChessBox (char file, int rank, char color)
+    public ChessBox (int file, int rank, String color)
     {
         this.file = file;
         this.rank = rank;
@@ -23,10 +23,16 @@ public class ChessBox {
     @Override
     public String toString()
     {
-        return String.format(color + " box: " + file + rank);
+        return String.format(convertFileNumber(rank) + "" + file);
     }
 
-    public static int getFileNumber(char f)
+    public static char convertFileNumber(int f)
+    {
+        //add the ASCII value of 'a' to get the index character
+        return (char)(f+97);
+    }
+
+    public static int convertFileCharacter(char f)
     {
         //subtract the ASCII value of 'a' to get the index number
         return ((int)f - 97);
@@ -50,5 +56,23 @@ public class ChessBox {
         occupied = false;
         occupyingPiece = null;
         return toReturnPiece;
+    }
+
+    //---------Getter methods----------
+
+    public int getFile() {
+        return file;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public boolean isOccupied() {
+        return occupied;
     }
 }
