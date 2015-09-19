@@ -6,3 +6,5 @@ Emphasis is on code-style and maintainability.
 Feel free to go through the source files till I finish the GUI implementation.
 
 Update 9/11: Most of the logic is complete. Check out the cool CONSOLE colors I used!
+
+Update 9/19: The Static GUI is ready! 
