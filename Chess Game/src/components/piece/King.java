@@ -44,9 +44,10 @@ public class King extends Piece
     public boolean isCheck(ChessBoard chessBoard)
     {
 
-        ArrayList<Piece> opponents = getOpponentPieces(chessBoard);
+        ArrayList<Piece> opponents = getAliveOpponentPieces(chessBoard);
         for(Piece opponent: opponents)
         {
+            System.out.println("Checking opponent: " + opponent);
             ArrayList<ChessBox> boxes = opponent.getPossibleMoves(chessBoard);
             for(ChessBox dangerBox: boxes)
             {

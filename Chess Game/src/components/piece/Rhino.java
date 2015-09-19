@@ -6,14 +6,12 @@ import components.ChessBox;
 import java.util.ArrayList;
 
 /**
- * Inherits from Piece and implements unique functions for the Rooks
- * Created by an5ra on 9/10/2015.
+ * Created by an5ra on 9/18/2015.
  */
-public class Rook extends Piece
-{
-    public Rook(String color, ChessBox setPosition)
+public class Rhino extends Piece {
+    public Rhino(String color, ChessBox setPosition)
     {
-        super("Rook", color, setPosition);
+        super("Rhino", color, setPosition);
     }
 
     public ArrayList<ChessBox> getPossibleMoves(ChessBoard chessBoard)
@@ -22,7 +20,7 @@ public class Rook extends Piece
         int currentRank = getCurrentPosition().getRank();
         int currentFile = getCurrentPosition().getFile();
 
-
+        ///-----------------ROOK MOVES--------------------///
 
         //-----------------trying along the same rank - thus rankDifference is 0------------------
 
@@ -60,6 +58,16 @@ public class Rook extends Piece
 
         }
 
+        ///-----------------KING MOVES--------------------///
+
+        addToPossibleMoves(chessBoard,possibleMoves,1,0);//up
+        addToPossibleMoves(chessBoard,possibleMoves,-1,0);//down
+        addToPossibleMoves(chessBoard,possibleMoves,0,1);//right
+        addToPossibleMoves(chessBoard,possibleMoves,0,-1);//left
+        addToPossibleMoves(chessBoard,possibleMoves,1,1);//upright
+        addToPossibleMoves(chessBoard,possibleMoves,1,-1);//upleft
+        addToPossibleMoves(chessBoard,possibleMoves,-1,-1);//downleft
+        addToPossibleMoves(chessBoard, possibleMoves, -1, 1);//downright
 
         return possibleMoves;
     }

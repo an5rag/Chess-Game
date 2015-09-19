@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Abstract class having common attributes across all pieces
+ * Abstract class having common attributes across all allPieces
  * Also implements all common functions
  * Created by an5ra on 9/7/2015.
  */
 abstract public class Piece {
+
 
     //--------DECLARING COLOR CONSTANTS----------
     public static final String ANSI_RESET = "\u001B[0m";
@@ -33,7 +34,7 @@ abstract public class Piece {
     //Points to the piece which killed it
     Piece wasKilledBy;
 
-    //List of pieces it killed
+    //List of allPieces it killed
     ArrayList<Piece> piecesKilled = new ArrayList<Piece>();
 
     /**
@@ -60,14 +61,14 @@ abstract public class Piece {
     public String toString()
     {
         if(color.equals("black"))
-          return String.format(ANSI_RED + name.charAt(0) +""+ name.charAt(name.length()-1) + ANSI_RESET);
-          return String.format(ANSI_YELLOW+ name.charAt(0) +""+ name.charAt(name.length()-1)+ ANSI_RESET);
+          return String.format( name.charAt(0) +""+ name.charAt(name.length()-1) );
+          return String.format( name.charAt(0) +""+ name.charAt(name.length()-1));
     }
 
 
     /**
      * Changes current position of the piece to the new destination box
-     * Calls add
+     * Calls addPiece of ChessBox
      * @param destinationChessBox
      */
     public void movePiece(ChessBox destinationChessBox)
@@ -108,15 +109,18 @@ abstract public class Piece {
         int newRank = currentPosition.getRank() + RankDifference;
         int newFile = currentPosition.getFile()+ FileDifference;
 
+        System.out.println("Trying "+ newRank + "," + newFile);
+
         ChessBox newChessBox;
         //try-catch block to ensure that on accessing a non-existent box, the game doesn't fail
         try {
-            newChessBox = chessBoard.boxes[newFile][newRank];
-            if (!newChessBox.isOccupiedByOwnPiece(this))
+            newChessBox = chessBoard.boxes[newRank][newFile];
+            if (!newChessBox.isOccupiedByFriendlyPiece(this))
                 possibleMoves.add(newChessBox);
         }
-        catch (ArrayIndexOutOfBoundsException e)
+        catch (Exception e)
         {
+            //silently ignore
             return;
         }
 
@@ -148,10 +152,36 @@ abstract public class Piece {
         wasKilledBy=killer;
     }
 
-    public ArrayList<Piece> getOpponentPieces(ChessBoard chessBoard)
+    /**
+     * Returns list of ALIVE Opponent Pieces
+     * @param chessBoard
+     * @return
+     */
+    public ArrayList<Piece> getAliveOpponentPieces(ChessBoard chessBoard)
     {
         ArrayList<Piece> opponents = new ArrayList<Piece>();
-        for(chessBoard.pieces)
+        for(Piece p: chessBoard.allPieces)
+        {
+            if(p.isAlive()&&!p.color.equals(color))
+            opponents.add(p);
+        }
+        return opponents;
+    }
+
+    /**
+     * Returns list of ALIVE Fiend Pieces
+     * @param chessBoard
+     * @return
+     */
+    public ArrayList<Piece> getAliveFriendlyPieces(ChessBoard chessBoard)
+    {
+        ArrayList<Piece> friends = new ArrayList<Piece>();
+        for(Piece p: chessBoard.allPieces)
+        {
+            if(p.isAlive()&&p.color.equals(color))
+                friends.add(p);
+        }
+        return friends;
     }
     /**
      * Abstract function to be implemented by every unique piece
@@ -161,6 +191,30 @@ abstract public class Piece {
      */
     abstract public ArrayList<ChessBox> getPossibleMoves(ChessBoard chessBoard);
 
+    //--------Setter methods--------
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public void setCurrentPosition(ChessBox currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+
+    public void setWasKilledBy(Piece wasKilledBy) {
+        this.wasKilledBy = wasKilledBy;
+    }
+
+    public void setPiecesKilled(ArrayList<Piece> piecesKilled) {
+        this.piecesKilled = piecesKilled;
+    }
 
     //--------Getter methods--------
     public String getName() {

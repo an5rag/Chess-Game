@@ -11,64 +11,75 @@ import java.util.ArrayList;
  */
 public class Pawn extends Piece
 {
+    int direction;
+    int startRank;
     //boolean hasEverMoved;
     public Pawn(String color, ChessBox setPosition)
     {
 
         super("Pawn", color, setPosition);
+        if(color.equalsIgnoreCase("black"))
+            direction = -1;
+        else
+            direction = 1;
+
+        startRank = setPosition.getRank();
     }
 
     public ArrayList<ChessBox> getPossibleMoves(ChessBoard chessBoard)
     {
         ArrayList<ChessBox> possibleMoves = new ArrayList<ChessBox>();
-        //------------------IF THE PAWN IS BLACK------------------
-        if(color.equals("black"))
-        {
-            if(!chessBoard.boxes[currentPosition.getFile()][currentPosition.getRank()-1].isOccupied())
-            addToPossibleMoves(chessBoard,possibleMoves,0,-1);//down
-            if(currentPosition.getFile()==6)
-                addToPossibleMoves(chessBoard,possibleMoves,0,-2);//two-steps down
-            try
+        int currentFile = currentPosition.getFile();
+        int currentRank = currentPosition.getRank();
+
+        //checking diagonal kills
+        //LEFT<<<<<<<<<<<<<
+        try
             {
-                if(chessBoard.boxes[currentPosition.getRank()-1][currentPosition.getFile()-1].isOccupiedByOpponentPiece(this))
+                if(chessBoard.boxes[currentRank+direction][currentFile-1].isOccupiedByOpponentPiece(this))
                 {
-                    addToPossibleMoves(chessBoard,possibleMoves,-1,-1);
+                    addToPossibleMoves(chessBoard,possibleMoves,direction,-1);
                 }
+
             }
-            catch(ArrayIndexOutOfBoundsException e){}
-            try
-            {
-                if(chessBoard.boxes[currentPosition.getRank()+1][currentPosition.getFile()-1].isOccupiedByOpponentPiece(this))
-                {
-                    addToPossibleMoves(chessBoard,possibleMoves,+1,-1);
-                }
-            }
-            catch(ArrayIndexOutOfBoundsException e){}
+        catch(ArrayIndexOutOfBoundsException e) {//silently ignore
         }
-        //-----------------IF THE PAWN IS WHITE---------------
-        else {
-            if(!chessBoard.boxes[currentPosition.getFile()][currentPosition.getRank()+1].isOccupied())
-            addToPossibleMoves(chessBoard,possibleMoves,0,1);//up
-            if(currentPosition.getFile()==1)
-                addToPossibleMoves(chessBoard,possibleMoves,0,2);//two-steps up
-            try{
-                if(chessBoard.boxes[currentPosition.getRank()-1][currentPosition.getFile()+1].isOccupiedByOpponentPiece(this))
-                {
-                    addToPossibleMoves(chessBoard,possibleMoves,-1,+1);
-                }
+        //RIGHT>>>>>>>>>>>>
+        try
+        {
+            if(chessBoard.boxes[currentRank+direction][currentFile+1].isOccupiedByOpponentPiece(this))
+            {
+                addToPossibleMoves(chessBoard,possibleMoves,direction,1);
             }
-            catch(ArrayIndexOutOfBoundsException e)
-            {}
-            try{
-                if(chessBoard.boxes[currentPosition.getRank()+1][currentPosition.getFile()+1].isOccupiedByOpponentPiece(this))
-                {
-                    addToPossibleMoves(chessBoard,possibleMoves,+1,+1);
-                }
-            }
-            catch(ArrayIndexOutOfBoundsException e)
-            {}
+
+        }
+        catch(ArrayIndexOutOfBoundsException e) {//silently ignore
         }
 
+        //checking two-step jump in the start
+        try
+        {
+            if(!chessBoard.boxes[currentRank+2*direction][currentFile].isOccupied())
+            {
+                if(currentRank == startRank)
+                addToPossibleMoves(chessBoard,possibleMoves,direction*2,0);
+            }
+
+        }
+        catch(ArrayIndexOutOfBoundsException e) {//silently ignore
+        }
+
+        //checking normal one-step
+        try
+        {
+            if(!chessBoard.boxes[currentRank+direction][currentFile].isOccupied())
+            {
+                    addToPossibleMoves(chessBoard,possibleMoves,direction,0);
+            }
+
+        }
+        catch(ArrayIndexOutOfBoundsException e) {//silently ignore
+        }
 
         return possibleMoves;
     }

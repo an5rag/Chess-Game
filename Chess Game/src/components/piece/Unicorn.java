@@ -6,14 +6,13 @@ import components.ChessBox;
 import java.util.ArrayList;
 
 /**
- * Inherits from Piece and implements unique functions for the Bishops
- * Created by an5ra on 9/10/2015.
+ * Created by an5ra on 9/18/2015.
  */
-public class Bishop extends Piece
-{
-    public Bishop(String color, ChessBox setPosition)
+public class Unicorn extends Piece {
+
+    public Unicorn(String color, ChessBox setPosition)
     {
-        super("Bishop", color, setPosition);
+        super("Unicorn", color, setPosition);
     }
 
     public ArrayList<ChessBox> getPossibleMoves(ChessBoard chessBoard)
@@ -21,6 +20,8 @@ public class Bishop extends Piece
         ArrayList<ChessBox> possibleMoves = new ArrayList<ChessBox>();
         int currentRank = getCurrentPosition().getRank();
         int currentFile = getCurrentPosition().getFile();
+
+        ///---------------------BISHOP MOVES---------------------------
 
         //-----------------trying along the right diagonal------------------
 
@@ -57,7 +58,19 @@ public class Bishop extends Piece
                 break;
 
         }
+
+        ///--------------------KING MOVES--------------------
+
+
+        addToPossibleMoves(chessBoard,possibleMoves,1,0);//up
+        addToPossibleMoves(chessBoard,possibleMoves,-1,0);//down
+        addToPossibleMoves(chessBoard,possibleMoves,0,1);//right
+        addToPossibleMoves(chessBoard,possibleMoves,0,-1);//left
+        addToPossibleMoves(chessBoard,possibleMoves,1,1);//upright
+        addToPossibleMoves(chessBoard,possibleMoves,1,-1);//upleft
+        addToPossibleMoves(chessBoard,possibleMoves,-1,-1);//downleft
+        addToPossibleMoves(chessBoard, possibleMoves, -1, 1);//downright
+
         return possibleMoves;
     }
-
 }

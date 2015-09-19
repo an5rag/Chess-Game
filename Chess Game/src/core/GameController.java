@@ -6,7 +6,7 @@ import components.ChessBoard;
 import java.util.Scanner;
 
 /**
- * Main Controller class to set-up, call all logic functions
+ * Main Controller class to set-up Model, call all logic functions and Generate View
  * Created by an5ra on 9/8/2015.
  */
 public class GameController {
@@ -15,6 +15,7 @@ public class GameController {
     {
         ChessBoard c = new ChessBoard();
         SetBoard s = new SetBoard(c);
+        s.setPieces();
         Move m = new Move(c);
 
         //Infinite Game-Loop

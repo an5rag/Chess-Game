@@ -5,7 +5,7 @@ import components.ChessBox;
 import components.piece.Piece;
 
 /**
- * The class is used to facilitate movement of pieces across the chess board
+ * The class is used to facilitate movement of allPieces across the chess board
  * Created by an5ra on 9/8/2015.
  */
 public class Move {
@@ -49,9 +49,33 @@ public class Move {
 
         //Piece lifted from box
         Piece p =sourceBox.removeCurrentPiece();
-        assert p!=null;
+//        assert p!=null;
 
-        //only moves the pieces once its deemed valid
+        //only moves the allPieces once its deemed valid
+        if(p.checkMoveValidity(chessBoard,destinationBox))
+        {
+            p.movePiece(destinationBox);
+        }
+        else {
+            //Piece added back to box
+            sourceBox.addPiece(p);
+            System.out.println("Invalid move!");
+        }
+    }
+
+    /**
+     * Establishes a move of the piece in sourceBox to the destinationBox
+     * Only moves if allowed
+     * @param sourceBox
+     * @param destinationBox
+     */
+    public void move(ChessBox sourceBox, ChessBox destinationBox)
+    {
+        //Piece lifted from box
+        Piece p =sourceBox.removeCurrentPiece();
+//        assert p!=null;
+
+        //only moves the allPieces once its deemed valid
         if(p.checkMoveValidity(chessBoard,destinationBox))
         {
             p.movePiece(destinationBox);
