@@ -17,7 +17,7 @@ public class BishopTest {
     @Test
     public void testCheckMoveValidity() throws Exception {
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece bishop;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[3][4];

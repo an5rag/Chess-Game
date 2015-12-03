@@ -17,7 +17,7 @@ public class KingTest {
 
         System.out.println("----------------------------------");
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece pieceToPut;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[0][1];
@@ -32,7 +32,7 @@ public class KingTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece pieceToPut;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];
@@ -97,7 +97,7 @@ public class KingTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece king;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];
@@ -131,7 +131,7 @@ public class KingTest {
     public void testIsCheckByPawn() throws Exception {
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         King king;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];
@@ -153,7 +153,7 @@ public class KingTest {
     @Test
     public void testIsCheckByKnight() throws Exception {
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         King king;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];
@@ -176,7 +176,7 @@ public class KingTest {
     @Test
     public void testIsCheckByQueen() throws Exception {
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         King king;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];
@@ -197,7 +197,7 @@ public class KingTest {
     @Test
     public void testIsCheckByRook() throws Exception {
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         King king;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];
@@ -219,7 +219,7 @@ public class KingTest {
     public void testIsCheckByBishop() throws Exception {
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         King king;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];

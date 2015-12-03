@@ -3,10 +3,8 @@ package test.pieceTests;
 import boardSetUp.SetBoard;
 import components.ChessBoard;
 import components.ChessBox;
-import components.piece.King;
 import components.piece.Piece;
 import components.piece.Rhino;
-import components.piece.Rook;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +18,7 @@ public class RhinoTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece rhino;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[0][0];
@@ -68,7 +66,7 @@ public class RhinoTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece rhino;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];

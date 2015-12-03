@@ -3,8 +3,6 @@ package test.pieceTests;
 import boardSetUp.SetBoard;
 import components.ChessBoard;
 import components.ChessBox;
-import components.piece.Bishop;
-import components.piece.King;
 import components.piece.Piece;
 import components.piece.Unicorn;
 import org.junit.Test;
@@ -18,7 +16,7 @@ public class UnicornTest {
     @Test
     public void testBishopMoveValidity() throws Exception {
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece unicorn;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[3][4];
@@ -53,7 +51,7 @@ public class UnicornTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece unicorn;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];

@@ -4,7 +4,7 @@ import boardSetUp.SetBoard;
 import components.ChessBoard;
 import components.ChessBox;
 import components.piece.*;
-import core.Move;
+import model.Move;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -17,7 +17,7 @@ public class PawnTest {
     @Test
     public void testMoveValidityStepUpWhite() throws Exception {
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece pieceToPut;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[1][7];
@@ -25,21 +25,21 @@ public class PawnTest {
         c.allPieces.add(pieceToPut);
         System.out.println("----------------------------------");
 
-        //valid move
+        //valid makeMove
         ChessBox boxToMoveTo = c.boxes[2][7];
         boolean check = pieceToPut.checkMoveValidity(c,boxToMoveTo);
         assertEquals(true, check);
 
         Move moveObject = new Move(c);
-        moveObject.move(pieceToPut.getCurrentPosition(), c.boxes[2][7]);
+        moveObject.makeMove(pieceToPut.getCurrentPosition(), c.boxes[2][7]);
         assertEquals(c.boxes[2][7],pieceToPut.getCurrentPosition());
 
-        //Invalid move
+        //Invalid makeMove
         boxToMoveTo = c.boxes[4][7];
         check = pieceToPut.checkMoveValidity(c,boxToMoveTo);
         assertEquals(false, check);
 
-        //valid move
+        //valid makeMove
         boxToMoveTo = c.boxes[3][7];
         check = pieceToPut.checkMoveValidity(c,boxToMoveTo);
         assertEquals(true, check);
@@ -51,7 +51,7 @@ public class PawnTest {
     @Test
     public void testMoveValidityStepUpBlack() throws Exception {
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece pieceToPut;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[6][7];
@@ -59,21 +59,21 @@ public class PawnTest {
         c.allPieces.add(pieceToPut);
         System.out.println("----------------------------------");
 
-        //valid move
+        //valid makeMove
         ChessBox boxToMoveTo = c.boxes[5][7];
         boolean check = pieceToPut.checkMoveValidity(c,boxToMoveTo);
         assertEquals(true, check);
 
         Move moveObject = new Move(c);
-        moveObject.move(pieceToPut.getCurrentPosition(), boxToMoveTo);
+        moveObject.makeMove(pieceToPut.getCurrentPosition(), boxToMoveTo);
         assertEquals(boxToMoveTo,pieceToPut.getCurrentPosition());
 
-        //valid move
+        //valid makeMove
         boxToMoveTo = c.boxes[4][7];
         check = pieceToPut.checkMoveValidity(c,boxToMoveTo);
         assertEquals(true, check);
 
-        //invalid move
+        //invalid makeMove
         boxToMoveTo = c.boxes[3][7];
         check = pieceToPut.checkMoveValidity(c,boxToMoveTo);
         assertEquals(false, check);
@@ -85,7 +85,7 @@ public class PawnTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece pawn;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[1][0];
@@ -120,7 +120,7 @@ public class PawnTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece pawn;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[1][4];

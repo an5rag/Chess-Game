@@ -42,7 +42,7 @@ public class ChessBox {
      */
     public void addPiece(Piece toAddPiece)
     {
-//        assert occupyingPiece == null: "This box already has a piece in it";
+
         occupyingPiece=toAddPiece;
         occupied = true;
     }

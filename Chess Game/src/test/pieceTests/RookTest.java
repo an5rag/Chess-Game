@@ -18,7 +18,7 @@ public class RookTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece rook;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[0][0];

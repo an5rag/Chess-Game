@@ -14,17 +14,17 @@ import java.util.List;
 abstract public class Piece {
 
 
-    //--------DECLARING COLOR CONSTANTS----------
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-    //-------------------------------------------
+//    //--------DECLARING COLOR CONSTANTS----------
+//    public static final String ANSI_RESET = "\u001B[0m";
+//    public static final String ANSI_BLACK = "\u001B[30m";
+//    public static final String ANSI_RED = "\u001B[31m";
+//    public static final String ANSI_GREEN = "\u001B[32m";
+//    public static final String ANSI_YELLOW = "\u001B[33m";
+//    public static final String ANSI_BLUE = "\u001B[34m";
+//    public static final String ANSI_PURPLE = "\u001B[35m";
+//    public static final String ANSI_CYAN = "\u001B[36m";
+//    public static final String ANSI_WHITE = "\u001B[37m";
+//    //-------------------------------------------
 
     String name;
     String color;
@@ -69,16 +69,28 @@ abstract public class Piece {
     /**
      * Changes current position of the piece to the new destination box
      * Calls addPiece of ChessBox
+     * if destination box is occupied, kills the piece in it
+     * -------NOTE: IMPORTANT---------
+     * This method assumes that the move validity was checked in advance
+     * and that the destination DOES NOT have a friendly piece
      * @param destinationChessBox
      */
     public void movePiece(ChessBox destinationChessBox)
     {
+
         currentPosition = destinationChessBox;
+        if(destinationChessBox.isOccupied())
+        {
+            Piece killed = destinationChessBox.getOccupyingPiece();
+            killed.die(this);
+        }
         destinationChessBox.addPiece(this);
     }
 
     /**
-     * Checks if a move is possible or not and returns appropriate boolean
+     * Checks if a makeMove is possible or not and returns appropriate boolean
+     * uses both getPossibleMoves() (-which uses addToPossibleMoves())
+     * and insidePossibleMoves() to determine validity
      * @param chessBoard
      * @param destinationChessBox
      * @return
@@ -87,12 +99,12 @@ abstract public class Piece {
     {
         ArrayList<ChessBox> possibleMoves = getPossibleMoves(chessBoard); //get List of all Possible moves
 
-        System.out.println("Printing out possible Moves:"); //for debug purposes
-        for(ChessBox c: possibleMoves)
-        System.out.println(c);
+//        System.out.println("Printing out possible Moves:"); //for debug purposes
+//        for(ChessBox c: possibleMoves)
+//        System.out.println(c);
 
         //if the destination box exists in the possible moves, it returns true
-        if(insidePossibleMovesList(possibleMoves,destinationChessBox))
+        if(insidePossibleMovesList(possibleMoves, destinationChessBox))
             return true;
         return false;
     }
@@ -109,7 +121,7 @@ abstract public class Piece {
         int newRank = currentPosition.getRank() + RankDifference;
         int newFile = currentPosition.getFile()+ FileDifference;
 
-        System.out.println("Trying "+ newRank + "," + newFile);
+//        System.out.println("Trying "+ newRank + "," + newFile);
 
         ChessBox newChessBox;
         //try-catch block to ensure that on accessing a non-existent box, the game doesn't fail
@@ -117,6 +129,7 @@ abstract public class Piece {
             newChessBox = chessBoard.boxes[newRank][newFile];
             if (!newChessBox.isOccupiedByFriendlyPiece(this))
                 possibleMoves.add(newChessBox);
+
         }
         catch (Exception e)
         {
@@ -150,6 +163,11 @@ abstract public class Piece {
     {
         alive=false;
         wasKilledBy=killer;
+    }
+
+    public void revive() {
+        alive = true;
+        wasKilledBy = null;
     }
 
     /**
@@ -216,6 +234,7 @@ abstract public class Piece {
         this.piecesKilled = piecesKilled;
     }
 
+
     //--------Getter methods--------
     public String getName() {
         return name;
@@ -240,5 +259,7 @@ abstract public class Piece {
     public List<Piece> getPiecesKilled() {
         return piecesKilled;
     }
+
+
 }
 

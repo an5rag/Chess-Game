@@ -28,9 +28,9 @@ public class Queen extends Piece
         //trying RIGHT UP
         for(int i = 1; (currentFile+i)<8 && (currentRank+i)<8;i++) {
             addToPossibleMoves(chessBoard, possibleMoves, i, i);//right-up
-            if(chessBoard.boxes[currentRank+1][currentFile+i].isOccupied())
+            if(chessBoard.boxes[currentRank+i][currentFile+i].isOccupied()) {
                 break;
-
+            }
         }
 
         //trying LEFT DOWN
@@ -52,7 +52,7 @@ public class Queen extends Piece
         }
 
         //trying DOWN RIGHT
-        for(int i = 1; (currentRank-i)>=0 &&(currentRank+i)<8;i++) {
+        for(int i = 1; (currentRank-i)>=0 &&(currentFile+i)<8;i++) {
             addToPossibleMoves(chessBoard, possibleMoves, -i, i);//right-down
             if(chessBoard.boxes[currentRank-i][currentFile+i].isOccupied())
                 break;

@@ -27,7 +27,7 @@ public class Bishop extends Piece
         //trying RIGHT UP
         for(int i = 1; (currentFile+i)< chessBoard.getNumberOfFiles() && (currentRank+i)< chessBoard.getNumberOfRanks();i++) {
             addToPossibleMoves(chessBoard, possibleMoves, i, i);//right-up
-            if(chessBoard.boxes[currentRank+1][currentFile+i].isOccupied())
+            if(chessBoard.boxes[currentRank+i][currentFile+i].isOccupied())
                 break;
 
         }

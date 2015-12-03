@@ -4,7 +4,7 @@ import components.ChessBoard;
 import components.ChessBox;
 import components.piece.King;
 import components.piece.Piece;
-import core.Move;
+import model.Move;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -28,7 +28,7 @@ public class MoveTest {
     @Test
     public void testMove() throws Exception {
         ChessBoard chessBoard = new ChessBoard();
-        //trying valid move
+        //trying valid makeMove
         ChessBox box = new ChessBox(1,1,"black");
         Piece p = new King("black", box);
         //making friendly piece

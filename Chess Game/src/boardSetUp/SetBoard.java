@@ -1,6 +1,7 @@
 package boardSetUp;
 import components.*;
 import components.piece.*;
+import model.GameState;
 
 /**
  * Sets the board and its Pieces (in hard-coded locations)
@@ -10,9 +11,17 @@ public class SetBoard {
 
     ChessBoard chessBoard;
 
-    public SetBoard(ChessBoard chessBoard)
+    public SetBoard(ChessBoard chessBoard, boolean isSpecial)
     {
         this.chessBoard = chessBoard;
+        setBoxes();
+        //setPieces(isSpecial);
+
+
+    }
+
+    public void setBoxes()
+    {
         for(int i = 0; i<chessBoard.getNumberOfRanks();i++)
             for(int j = 0; j<chessBoard.getNumberOfFiles();j++)
             {   String color;
@@ -23,30 +32,21 @@ public class SetBoard {
                         color = "white";
                 }
                 else
-                    if(j%2==0)
-                        color= "white";
-                    else
-                        color="black";
+                if(j%2==0)
+                    color= "white";
+                else
+                    color="black";
                 ChessBox chessBox = new ChessBox(i,j,color);
                 chessBoard.boxes[i][j] = chessBox;
             }
-
     }
 
-    /**
-     * Used to load a game from a previously saved sate
-     * @param chessBoard
-     * @param toLoadGameState
-     */
-    public SetBoard(ChessBoard chessBoard, GameState toLoadGameState)
-    {
-//not implemented yet
-    }
 
     /**
      * Sets the Pieces in known locations
+     * @param isSpecial
      */
-    public void setPieces()
+    public void setPieces(boolean isSpecial)
     {
         Piece pieceToPut;
         ChessBox boxToPutIn;
@@ -83,7 +83,7 @@ public class SetBoard {
 
         //Setting white rooks
         boxToPutIn = chessBoard.boxes[0][0];
-        pieceToPut = new Rook("white", boxToPutIn);
+        pieceToPut = new Rhino("white", boxToPutIn);
         chessBoard.allPieces.add(pieceToPut);
 
         boxToPutIn = chessBoard.boxes[0][7];
@@ -141,12 +141,14 @@ public class SetBoard {
         boxToPutIn = chessBoard.boxes[7][3];
         pieceToPut = new King("black", boxToPutIn);
         chessBoard.allPieces.add(pieceToPut);
+        chessBoard.setBlackKing((King)pieceToPut);
 
 
         //Setting white king
         boxToPutIn = chessBoard.boxes[0][3];
         pieceToPut = new King("white", boxToPutIn);
         chessBoard.allPieces.add(pieceToPut);
+        chessBoard.setWhiteKing((King)pieceToPut);
 
     }
 }

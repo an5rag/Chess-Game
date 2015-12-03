@@ -47,7 +47,7 @@ public class King extends Piece
         ArrayList<Piece> opponents = getAliveOpponentPieces(chessBoard);
         for(Piece opponent: opponents)
         {
-            System.out.println("Checking opponent: " + opponent);
+            //System.out.println("Checking opponent: " + opponent);
             ArrayList<ChessBox> boxes = opponent.getPossibleMoves(chessBoard);
             for(ChessBox dangerBox: boxes)
             {

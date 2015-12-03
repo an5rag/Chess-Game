@@ -20,7 +20,7 @@ public class KnightTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece knight;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];
@@ -85,7 +85,7 @@ public class KnightTest {
 
 
         ChessBoard c = new ChessBoard();
-        SetBoard s = new SetBoard(c);
+        SetBoard s = new SetBoard(c, false);
         Piece knight;
         ChessBox boxToPutIn;
         boxToPutIn = c.boxes[4][5];

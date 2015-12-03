@@ -61,7 +61,7 @@ public class Pawn extends Piece
         {
             if(!chessBoard.boxes[currentRank+2*direction][currentFile].isOccupied())
             {
-                if(currentRank == startRank)
+                if(currentRank == startRank && !chessBoard.boxes[currentRank+direction][currentFile].isOccupied())
                 addToPossibleMoves(chessBoard,possibleMoves,direction*2,0);
             }
 

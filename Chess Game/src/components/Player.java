@@ -14,6 +14,7 @@ public class Player {
     boolean inCheck;
     //Image profilePicture;
     double totalTimeSpent;
+    int score;
     ArrayList<Piece> deadPieces = new ArrayList<Piece>();
 
     /**
@@ -26,6 +27,7 @@ public class Player {
         this.name = name;
         inCheck = false;
         totalTimeSpent = 0.0;
+        score = 0;
     }
 
     /**
@@ -41,6 +43,7 @@ public class Player {
         inCheck = false;
         totalTimeSpent = 0.0;
     }
+
 
     /**
      * Used to print Player Statistics for debug purposes
@@ -69,5 +72,42 @@ public class Player {
 
     public void setTotalTimeSpent(double totalTimeSpent) {
         this.totalTimeSpent = totalTimeSpent;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Piece> getDeadPieces() {
+        return deadPieces;
+    }
+
+    public void setDeadPieces(ArrayList<Piece> deadPieces) {
+        this.deadPieces = deadPieces;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void incrementScore()
+    {
+        score++;
+    }
+
+    public void resetScore() {
+        score=0;
     }
 }
